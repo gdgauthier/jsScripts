@@ -1,0 +1,494 @@
+/*
+https://www.freecodecamp.org/challenges/seek-and-destroy
+Started 2-10-17. Ended on 6-10-17.
+You will be provided with an initial array (the first argument in the destroyer function), followed by one or more arguments. Remove all elements from the initial array that are of the same value as these arguments.
+*/
+
+function destroyer(arr) {
+ 
+  var args = Array.prototype.slice.call(arguments);
+  var arrArgs=args;
+  var arr0=arrArgs.shift();
+  var arr1=arrArgs.slice();
+  
+  var filtered = arr0.filter(function(e){return arr1.indexOf(e) === -1;});
+    
+    console.log(filtered);
+    
+}
+destroyer([1, 2, 3, 1, 2, 3], 2, 3); //should return [1, 1].
+//destroyer([1, 2, 3, 5, 1, 2, 3], 2, 3); //should return [1, 5, 1].
+//destroyer([3, 5, 1, 2, 2], 2, 3, 5); //should return [1].
+//destroyer([2, 3, 2, 3], 2, 3); //should return [].
+//destroyer(["tree", "hamburger", 53], "tree", 53); //should return ["hamburger"].
+
+/*
+https://www.freecodecamp.org/challenges/falsy-bouncer
+Started on 28-10-17. Finished on 28-10-17
+Remove all falsy values from an array.
+Falsy values in JavaScript are false, null, 0, "", undefined, and NaN.
+*/
+
+function bouncer(arr) {
+
+var falsey = arr.filter(function(item) {  
+  return item !== false && item !== null && item !== 0 && item !== "" && item !== undefined && !Number.isNaN(item);
+  });
+    
+  console.log(falsey);
+
+}
+
+bouncer([7, "ate", "", false, 9]); //should return [7, "ate", 9].
+//bouncer(["a", "b", "c"]); //should return ["a", "b", "c"].
+//bouncer([false, null, 0, NaN, undefined, ""]); //should return [].
+//bouncer([1, null, NaN, 2, undefined]); //should return [1, 2].
+
+//https://www.freecodecamp.org/challenges/find-the-longest-word-in-a-string
+function findLongestWord(str) {  
+  
+  var splitArray=str.split(" ");//Here I split the string into an array.
+  var arr=[];
+  
+    for (var i=0; i <splitArray.length; i++) {  //iterate the array so I get each element by separate.
+        
+      var splitChar=splitArray[i];//This one that holds each iterated element
+        
+      var splitNumber=splitChar.length;//This one holds each iterated element as number    
+           
+      arr.push(splitNumber);
+       
+    
+    } var max=Math.max.apply(null, arr);
+  
+      console.log(max);
+          
+      
+     
+    } 
+       
+      
+
+findLongestWord("The quick brown fox jumped over the lazy dog");
+
+/*
+https://www.freecodecamp.org/challenges/title-case-a-sentence
+You should start by splitting the string into an array of words.
+You should make the word lowercase before making the first letter uppercase.
+Use replace method on each word to capitalize the first letter of each word.
+In replace method, give first argument as the position of the first letter using charAt. For second argument write a function to return the capitalized letter as the replacement.
+You will need to create a new string with pieces of the previous one and at the end merge everything into a single string again.
+*/
+
+function titleCase(str) {
+  
+      var low=str.toLowerCase().split(' ');
+      var high=[];
+
+      for (var i=0; i <low.length; i++) {
+        var splitChar=low[i];
+        var res = splitChar.replace(splitChar.charAt(0), function myFunction(x){return x.toUpperCase();});
+        high.push(res);
+      }
+
+        console.log(high.join(' '));
+}
+
+titleCase("fREE cODE CAMP");
+
+//https://www.freecodecamp.org/challenges/reverse-a-string
+function reverseString(str) {
+
+    var strReverse = str.split('').reverse().join('');
+   
+  
+  console.log(strReverse);
+}
+
+reverseString("hello");
+
+//https://www.freecodecamp.org/challenges/factorialize-a-number
+function factorialize(num) {
+  
+  if (num === 0) {
+    return 1;
+  }console.log (num * factorialize(num - 1));
+        
+}
+
+factorialize(5);
+
+//https://www.freecodecamp.org/challenges/check-for-palindromes
+function palindrome(str) {
+  
+  var forward=str.toLowerCase().replace(/[^A-Za-z0-9]/g,'').split("").join("");
+  
+  var backward=str.toLowerCase().replace(/[^A-Za-z0-9]/g,'').split("").reverse().join("");
+ 
+  if (forward===backward){
+    
+    return true;
+  } else {
+    
+    return false;
+  }
+  
+}
+
+palindrome("eysdse");
+
+/*
+https://www.freecodecamp.org/challenges/return-largest-numbers-in-arrays
+Started working on this on 25-8-17. Finished 28-8-17
+Return an array consisting of the largest number from each provided sub-array.
+Remember, you can iterate through an array with a simple for loop, and access each member with array syntax arr[i].
+You will need to keep track of the array with the answer and the largest number of each sub-array.
+You can work with multidimensional arrays by Array[Index][SubIndex]
+Pay close attention to the timing of the storing of variables when working with loops
+*/
+
+function largestOfFour(arr) {
+ 
+  var four=[];
+  
+  for(var i = 0; i < arr.length; i++) {
+    var arr1 = arr[i];    
+    var sorted=arr1.sort(function(a, b){return b-a;});
+    var temp=[];
+      for(var j = 0; j < sorted.length; j++) {
+        temp.push(sorted[j]);
+  }
+    four.push(temp[0]);
+  }  
+  console.log(four);
+}
+
+largestOfFour([[4, 9, 1, 3], [13, 35, 18, 26], [32, 35, 97, 39], [1000000, 1001, 857, 1]]);
+
+/*
+https://www.freecodecamp.org/challenges/confirm-the-ending
+Started on 29-8-17. Ended on 30-8-17
+Check if a string (first argument, str) ends with the given target string (second argument, target).
+This challenge can be solved with the .endsWith() method, which was introduced in ES2015. But for the purpose of this challenge, we would like you to use one of the JavaScript substring methods instead.
+
+The function is a whole Boolean operation. You need to return true if the first argument ends with the second argument. This means that for the problem script, it should return true for the confirmEnding('Bastian', 'n'); case.
+Take a look at how substr() works. You will be trying to get the last Nth characters.
+To get the Nth-to-Last character you will use length() and turn it into a negative number.
+Check that you have the proper syntax and that you use === to compare.
+*/
+
+function confirmEnding(str, target) { 
+  
+  if (str.substring(str.length - target.length) === target) {
+    
+    return console.log(true);
+    
+  }
+  
+  else {
+    
+    return console.log(false);
+    
+    }  
+}
+
+confirmEnding("Bastiano", "no");
+
+/*
+https://www.freecodecamp.org/challenges/repeat-a-string-repeat-a-string
+Started working on 30-8-17. Ended on 31-8-17
+Repeat a given string (first argument) num times (second argument). Return an empty string if num is not a positive number.
+
+Hint: 1
+You can’t edit strings, you will need to create a variable to store the new string.
+
+Hint: 2
+Create a loop to repeat the code as many times as needed.
+
+Hint: 3
+Make the variable created store the current value and append the word to it.
+*/
+
+function repeatStringNumTimes(str, num) {
+
+  if (num <0){
+      
+    console.log("");
+      
+      } else {     
+  
+          var b=[];     
+          var i = 0;
+            do {
+              b.push(str);
+              i++;
+            }
+            while (i<num);
+        
+   } console.log(b.join(""));
+}
+
+//repeatStringNumTimes("abc", 3);
+//repeatStringNumTimes("*", 3); //should return "***".
+//repeatStringNumTimes("abc", 3); //should return "abcabcabc".
+//repeatStringNumTimes("abc", 4); //should return "abcabcabcabc".
+//repeatStringNumTimes("abc", 1); //should return "abc".
+//repeatStringNumTimes("*", 8); //should return "********".
+//repeatStringNumTimes("abc", -2); //should return "".
+
+/*
+https://www.freecodecamp.org/challenges/truncate-a-string
+Started on 31-8-17. Ended on 3-9-17
+Truncate a string (first argument) if it is longer than the given maximum string length (second argument). Return the truncated string with a ... ending.
+
+Note that inserting the three dots to the end will add to the string length.
+
+However, if the given maximum string length num is less than or equal to 3, then the addition of the three dots does not add to the string length in determining the truncated string.
+
+Problem Explanation:
+
+We need to reduce the length of the string or truncate it if it is longer than the given maximum lengths specified and add ... to the end. If it is not that long then we keep it as is.
+
+Hint: 1
+Strings are immutable in JavaScript so we will need a new variable to store the truncated string.
+
+Hint: 2
+You will need to use the slice() method and specify where to start and where to stop.
+
+Hint: 3
+Do not forget that when we truncate the word, we also must count the length added by ...
+*/
+
+function truncateString(str, num) {
+  
+  if (str.length === num) {
+    
+    console.log(str);
+    
+  }
+  
+    else {
+    
+      var temp1=str.slice(0, num)+"...";
+      var temp2=str.slice(0, num-3)+"...";
+    
+        if (num <=2){
+           
+          console.log(temp1);
+           
+        } 
+          else if (temp1 >str){
+            
+            console.log(str);
+                   
+          }
+          else {
+            
+            console.log(temp2); 
+           
+          }
+  
+   }
+}
+
+//truncateString("A-tisket a-tasket A green and yellow basket", 11); //should return "A-tisket...".
+//truncateString("Peter Piper picked a peck of pickled peppers", 14); //should return "Peter Piper...".
+//truncateString("A-tisket a-tasket A green and yellow basket", "A-tisket a-tasket A green and yellow basket".length); //should return "A-tisket a-tasket A green and yellow basket".
+//truncateString("A-tisket a-tasket A green and yellow basket", "A-tisket a-tasket A green and yellow basket".length + 2); //should return "A-tisket a-tasket A green and yellow basket".
+//truncateString("A-", 1); //should return "A...".
+//truncateString("Absolutely Longer", 2); //should return "Ab...".
+
+/*
+https://www.freecodecamp.org/challenges/chunky-monkey
+Started on 3-10-17. Ended on 15-9-17
+Write a function that splits an array (first argument) into groups the length of size (second argument) and returns them as a two-dimensional array.
+
+Hint: 1
+The links above suggest to use Array.push(), so let’s start by first creating a new array to store the smaller arrays we will soon have 
+
+Hint: 2
+Next we’ll need a for loop to loop through arr.
+
+Hint: 3
+Finally, we need a method to do the actual splitting and we can use Array.slice() to do that. The key to this Algorithm is understanding how a for loop, size, Array.slice() and Array.push() all work together.
+*/
+
+function chunkArrayInGroups(arr, size) {
+  
+  var end=[];
+    
+  for(var i = 0; i<arr.length; i+=size) {
+    
+    var arr1=arr.slice(i, size+i);
+    end.push(arr1);
+   }
+  console.log(end);
+}
+chunkArrayInGroups(["a", "b", "c", "d"], 2); //should return [["a", "b"], ["c", "d"]].
+//chunkArrayInGroups([0, 1, 2, 3, 4, 5], 3); //should return [[0, 1, 2], [3, 4, 5]].
+//chunkArrayInGroups([0, 1, 2, 3, 4, 5], 2); //should return [[0, 1], [2, 3], [4, 5]].
+//chunkArrayInGroups([0, 1, 2, 3, 4, 5], 4); //should return [[0, 1, 2, 3], [4, 5]].
+//chunkArrayInGroups([0, 1, 2, 3, 4, 5, 6], 3); //should return [[0, 1, 2], [3, 4, 5], [6]].
+//chunkArrayInGroups([0, 1, 2, 3, 4, 5, 6, 7, 8], 4); //should return [[0, 1, 2, 3], [4, 5, 6, 7], [8]].
+//chunkArrayInGroups([0, 1, 2, 3, 4, 5, 6, 7, 8], 2); //should return [[0, 1], [2, 3], [4, 5], [6, 7], [8]].
+
+/*
+https://www.freecodecamp.org/challenges/slasher-flick
+Started and Solved on 18-9-17.
+Return the remaining elements of an array after chopping off n elements from the head.
+The head means the beginning of the array, or the zeroth index.
+ Hint: 1
+We need only the remaining part of an array, so we can just remove what we don't.
+Hint: 2
+splice() function can be used.
+Hint: 3
+slice() function can be used.
+*/
+
+function slasher(arr, howMany) {      
+   
+ console.log(arr.slice(howMany));
+  
+}
+//slasher([1, 2, 3], 2) //should return [3].
+//slasher([1, 2, 3], 0) //should return [1, 2, 3].
+//slasher([1, 2, 3], 9) //should return [].
+//slasher([1, 2, 3], 4) //should return [].
+//slasher(["burgers", "fries", "shake"], 1) //should return ["fries", "shake"].
+slasher([1, 2, "chicken", 3, "potatoes", "cheese", 4], 5) //should return ["cheese", 4].
+
+/*
+https://www.freecodecamp.org/challenges/mutations
+Started on 18-9-17. Solved 2-10-17
+Return true if the string in the first element of the array contains all of the letters of the string in the second element of the array.
+
+For example, ["hello", "Hello"], should return true because all of the letters in the second string are present in the first, ignoring case.
+The arguments ["hello", "hey"] should return false because the string "hello" does not contain a "y".
+Lastly, ["Alien", "line"], should return true because all of the letters in "line" are present in "Alien".
+
+Hint: 1
+If everything is lowercase it will be easier to compare.
+
+Hint: 2
+Our strings might be easier to work with if they were arrays of characters.
+
+Hint: 3
+A loop might help. Use indexOf() to check if the letter of the second word is on the first.
+*/
+
+function mutation(arr) {  
+  
+ var arr0=arr[0].toLowerCase().split("");
+ var arr1=arr[1].toLowerCase().split("");   
+  
+  for (i=0; i<arr1.length;i++){     
+
+    if (arr0.indexOf(arr1[i]) === -1){
+      console.log("false");
+    } 
+    }
+ 
+ console.log("true"); 
+}
+
+mutation(["hello", "hey"]); //should return false.
+//mutation(["hello", "Hello"]); //should return true.
+//mutation(["zyxwvutsrqponmlkjihgfedcba", "qrstu"]); //should return true.
+//mutation(["Mary", "Army"]); //should return true.
+//mutation(["Mary", "Aarmy"]); //should return true.
+//mutation(["Alien", "line"]); //should return true.
+//mutation(["floor", "for"]); //should return true.
+//mutation(["hello", "neo"]); //should return false.
+//mutation(["voodoo", "no"]); //should return false.
+
+/*
+https://www.freecodecamp.org/challenges/caesars-cipher
+Started on 28-9-17. Ended on 29-9-17.
+One of the simplest and most widely known ciphers is a Caesar cipher, also known as a shift cipher. In a shift cipher the meanings of the letters are shifted by some set amount.
+A common modern use is the ROT13 cipher, where the values of the letters are shifted by 13 places. Thus 'A' ↔ 'N', 'B' ↔ 'O' and so on.
+Write a function which takes a ROT13 encoded string as input and returns a decoded string.
+All letters will be uppercase. Do not transform any non-alphabetic character (i.e. spaces, punctuation), but do pass them on.
+*/
+
+function rot13(str) { 
+   
+  var arr=str.split("");
+ 
+  var arr1=[];
+  var arr2=[]; 
+ 
+  for (i=0;i<arr.length;i++){    
+   
+   var item=arr[i];
+   var ascii=item.charCodeAt();
+   
+   if (item.match(/[A-Z]/)) {   
+   
+     if ( ascii >=65 && ascii <=77 ) {
+    
+       ascii += 13;
+    
+      }
+      else {
+            
+        ascii -= 13;
+      }
+    
+    arr1.push(ascii);
+  }
+   else {
+   
+   arr1.push(item.charCodeAt());
+  }
+   
+  } 
+ 
+ for (j=0;j<arr1.length;j++){
+ 
+   var item2=arr1[j];
+   arr2.push(String.fromCharCode(item2));
+ 
+ }
+ 
+ var test=arr2.join("");
+  
+ console.log(test);
+}
+
+//rot13("LBH QVQ VG!");
+//rot13("SERR PBQR PNZC"); //should decode to "FREE CODE CAMP"
+//rot13("SERR CVMMN!"); //should decode to "FREE PIZZA!"
+//rot13("SERR YBIR?"); //should decode to "FREE LOVE?"
+//rot13("GUR DHVPX OEBJA QBT WHZCRQ BIRE GUR YNML SBK."); //should decode to "THE QUICK BROWN DOG JUMPED OVER THE LAZY FOX."
+
+/*
+https://www.freecodecamp.org/challenges/where-do-i-belong
+Started 6-10-17. Ended 6-10-17
+Return the lowest index at which a value (second argument) should be inserted into an array (first argument) once it has been sorted. The returned value should be a number.
+
+For example, getIndexToIns([1,2,3,4], 1.5) should return 1 because it is greater than 1 (index 0), but less than 2 (index 1).
+
+Likewise, getIndexToIns([20,3,5], 19) should return 2 because once the array has been sorted it will look like [3,5,20] and 19 is less than 20 (index 2) and greater than 5 (index 1).
+*/
+
+function getIndexToIns(arr, num) {
+  
+  arr.push(num)
+ 
+  var arr1 = arr.sort(function(a, b) {
+  return a - b;
+  });
+  
+  var index=arr1.indexOf(num)
+  
+  console.log(index);
+}
+
+//getIndexToIns([10, 20, 30, 40, 50], 35); //should return 3.
+//getIndexToIns([10, 20, 30, 40, 50], 30); //should return 2.
+//getIndexToIns([40, 60], 50); //should return 1.
+//getIndexToIns([3, 10, 5], 3); //should return 0.
+//getIndexToIns([5, 3, 20, 3], 5); //should return 2.
+//getIndexToIns([2, 20, 10], 19); //should return 2.
+//getIndexToIns([2, 5, 10], 15); //should return 3.
+
